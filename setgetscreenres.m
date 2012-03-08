@@ -98,14 +98,19 @@ int main (int argc, const char * argv[])
 
 void ListDisplays( CGDisplayCount dispCount, CGDirectDisplayID *dispArray )
 {
-    int h, v, depth, freq;
-    
-        printf("Displays found: %d\n", dispCount);
-        for (int i = 0 ; i < dispCount ;  i++ ) {
+	int	h, v, depth, freq, i;
+	CGDirectDisplayID mainDisplay = CGMainDisplayID();
+	
+    printf("Displays found: %d\n", dispCount);
+    for	(i = 0 ; i < dispCount ;  i++ ) {
 
-            GetDisplayParms(dispArray, i, &h, &v, &depth, &freq);
-            printf("Display %d (id %d):  %d x %d x %d @ %dHz\n", i+1, dispArray[i], h, v, depth, freq);
-        }
+        GetDisplayParms(dispArray, i, &h, &v, &depth, &freq);
+        printf("Display %d (id %d):  %d x %d x %d @ %dHz", i+1, dispArray[i], h, v, depth, freq);
+        if ( mainDisplay == dispArray[i] ) 
+            printf(" (main)\n");
+        else
+            printf("\n");
+    }
 }
 
 
